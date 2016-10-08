@@ -14,6 +14,7 @@ var self = this;
         this.encryptedKey = sjcl.encrypt(password, randomKey);
         this.img=img;
         this.exp= Date.now() + 2592900000;
+        this.date= Date.now() 
         this.interested ={};
         this.employable={};
         this.jobId = Math.floor(Math.random()*9999999999999999) *Math.floor(Math.random()*9999999999999999)*Math.floor(Math.random()*9999999999999999)
