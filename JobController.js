@@ -3,35 +3,36 @@ function JobController(){
     var jobs = jobService.AllJobs;
 
     //create new job
-    $('.doc-container').on('click', 'btn-create', function(event) {
-        $('.doc-container').append(writeCreateJobForm());
+    $('.btn-create').on('click', function(event) {
+        writeCreateJobForm();
     })
     //creates html form for job creation
     function writeCreateJobForm() {
-        template = `<div class="create-job-container"><form id="create-job">
+        template = `<div class="create-job-container"><form class="form-group" id="create-job">
             Company Name:
-            <input type="text" name="coName" placeholder="Company Name">
+            <input type="text" class="form-control" name="coName" placeholder="Company Name">
             Job Title:
-            <input type="text" name="jobTitle" placeholder="Job Title">
+            <input type="text" class="form-control" name="jobTitle" placeholder="Job Title">
             Pay:
-            <input type="text" name="pay" placeholder="Salary">
+            <input type="text" class="form-control" name="pay" placeholder="Salary">
             Skills Required: 
-            <input type="text" name="skill-required" placeholder="Skill Required">
+            <input type="text" class="form-control" name="skill-required" placeholder="Skill Required">
             <button type="button" id='add-skill-btn' class='btn btn-primary'> + Skill </button>
             <ul class="list-group" id="add-skill-list">
             </ul>
             Listing URL:
-            <input type="text" name="link" placeholder="Link to Job Posting">
+            <input type="text" class="form-control" name="link" placeholder="Link to Job Posting">
             Description:
-            <textarea name="bio" placeholder="Short description of company & position"></textarea>
+            <textarea name="bio" class="form-control" placeholder="Short description of company & position"></textarea>
             Image URL:
-            <input type="text" name="img" placeholder="URL to image">
+            <input type="text" class="form-control" name="img" placeholder="URL to image">
             Create a password to access this listing later:
-            <input type="password" name="password">
-            <input type="reset">
-            <input type="submit" id="create-form-submit">
+            <input type="password" class="form-control" name="password">
+            <input type="reset" class="btn btn-danger">
+            <input type="submit" id="create-form-submit" class="btn btn-success">
             </form></div>`
-        return template;
+            console.log(template);
+        $('.doc-container').html(template);
     }
 
     //adds skill to list

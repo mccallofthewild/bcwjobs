@@ -28,7 +28,7 @@ function UserService(){
         }
     }
     //call addUser to add user to Users, returns their new unique user id
-    this.addUser(name, bio, phone, email, linkedin, portfolio, github, image, employable) {
+    this.addUser = function(name, bio, phone, email, linkedin, portfolio, github, image, employable) {
         //check for required variables
         if (!name || !phone || !email || !linkedin || !portfolio || !github) {
             return {error: 'required fields not completed'};
@@ -112,5 +112,3 @@ function UserService(){
 
 
     }
-
-}
