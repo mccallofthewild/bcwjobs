@@ -30,14 +30,16 @@ var loginState = false;
          var randomKey = Math.floor(Math.random()*9999999999999999) *Math.floor(Math.random()*9999999999999999)*Math.floor(Math.random()*9999999999999999)     
 }
 
-var AllJobs = {}
+var allJobs = {}
 
 this.addJob = function(coName,jobTitle, requirements, links, bio, pay,img, password){
     var job = new Job(coName,jobTitle, requirements, links, bio, pay,img, password)
-    AllJobs[job.jobId]= job
+ allJobs[job.jobId]= job
 }
 
-
+this.getJobs =function(){
+    return allJobs;
+}
 
 this.requiredFields =function(){
      if(!link || !bio || !img){
@@ -84,14 +86,14 @@ this.getSessionData = function(){
 
 //REMOVES A USER THE EMPLOYER DOESN'T WANT//
 this.removeInterestedUser = function(jobId, userId){
-   delete AllJobs[jobId].interested[userService.userId]
+   delete allJobs[jobId].interested[userService.userId]
 }
 
 
 
 //ADD A USER THE EMPLOYER WANTS INTO THEIR EMPLOYABLE ARRAY//
 this.makeEmployable = function(id, arr){
-    AllJobs[jobId].employable[userService.userId]
+ allJobs[jobId].employable[userService.userId]
 }
 
 
