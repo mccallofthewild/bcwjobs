@@ -102,13 +102,13 @@ function JobController(){
     }
 
     $('.doc-container').on("click", "btn-table", function (event) {
-        $.get('-table.html', (html) => {
+        $.get('-tableview.html', (html) => {
             $('.doc-container').append(html)
         });
     });
 
     $('.doc-container').on("click", "btn-swipe", function (event) {
-        $.get('-swipe.html', (html) => {
+        $.get('-cardview.html', (html) => {
             $('.doc-container').append(html)
         });
     });
