@@ -1,0 +1,28 @@
+UserService
+    UserId begins at 1000 and increments
+    Users
+        name - string, required
+        bio - string, limit length?
+        phone - string
+        email - string
+        linkedin - string url
+        portfolio - string url
+        github - string url
+        image - string url or file?
+        employable - boolean, may need function to fill
+        userId - incremented from UserService variable
+        interests - array
+            addInterest() - pass string interest
+            removeInterest() - pass index of interest in array
+            removeInterestByName() - pass string interest
+        abilities - array
+            addAbility() - pass string ability
+            removeAbility() - pass index of ability in array
+            removeAbilityByName - pass string ability
+        updateInfo(field, value) - update string property of userId
+            field - name, bio, phone, email, linkedin, portfolio, github, image
+            value - new string value to write to property
+        updateEmployable(true || false) - boolean argument to write to employable property
+    addUser(name, bio, phone, email, linkedin, portfolio, github, image, employable)
+    removeUser(id, obj) - existing, haven't tested/thought out this approach
+    login(username, password) - existing, not set up
