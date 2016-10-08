@@ -4,8 +4,6 @@ var userService = new UserService();
 
 var self = this; 
 
-
-var jobId =1; 
     function Job(coName,jobTitle, requirements, links, bio, pay,img, password){
         this.coName = coName; 
         this.jobTitle= jobTitle; 
@@ -17,12 +15,21 @@ var jobId =1;
         this.img=img;
         this.exp= Date.now() + 2592900000;
         this.jobId=jobId++;
-        this.interested =[];
-        this.employable=[];
+        this.interested ={};
+        this.employable={};
+        this.id = Math.floor(Math.random()*9999999999999999) *Math.floor(Math.random()*9999999999999999)*Math.floor(Math.random()*9999999999999999)
 
-         var randomKey = Math.floor(Math.random()*9999999999999999) *Math.floor(Math.random()*9999999999999999)*Math.floor(Math.random()*9999999999999999)
-      
+         var randomKey = Math.floor(Math.random()*9999999999999999) *Math.floor(Math.random()*9999999999999999)*Math.floor(Math.random()*9999999999999999)     
 }
+
+var AllJobs = {}
+
+this.addJob = function(coName,jobTitle, requirements, links, bio, pay,img, password){
+    var job = new Job(coName,jobTitle, requirements, links, bio, pay,img, password)
+    AllJobs[job.id]= job
+}
+
+
 
 this.requiredFields =function(){
      if(!link || !bio || !img){
@@ -34,7 +41,6 @@ this.verifyEmployer = function(password, encryptedKey){
    try{
          sjcl.decrypt(password, encryptedKey)
             save()
-            console.log('working')
             }catch(error){    
             console.log('error')
         alert('INCORRECT PASSWORD: TRY AGAIN')
@@ -71,6 +77,16 @@ this.removeInterestedUser = function(id,arr){
         }
     }
 }
+
+this.removeInterestedUser = function(jobId, userId){
+   delete AllJobs[jobId].interested[userId]
+}
+
+
+
+
+
+
 
 //ADD A USER THE EMPLOYER WANTS INTO THEIR EMPLOYABLE ARRAY//
 this.makeEmployable = function(id, arr){
