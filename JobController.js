@@ -101,6 +101,18 @@ function JobController(){
         return template;        
     }
 
+    function drawToTable() {
+        template = '';
+        for (var job in jobs) {
+            template += `<tr>
+                            <td>${jobs.coName}</td>
+                            <td>${jobs.title}</td>
+                            <td>${jobs.date}</td>
+                            <td class="clickable"><button class="btn btn-primary">Edit</button> <button class="btn btn-primary">Delete</button></td>
+                        </tr>`
+        }
+    }
+
     $('.doc-container').on("click", "btn-table", function (event) {
         $.get('-tableview.html', (html) => {
             $('.doc-container').append(html)
