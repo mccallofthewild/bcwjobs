@@ -6,7 +6,7 @@ function JobController(){
     $('.doc-container').on('click', 'btn-create', function(event) {
         $('.doc-container').append(writeCreateJobForm());
     })
-
+    //creates html form for job creation
     function writeCreateJobForm() {
         template = `<div class="create-job-container"><form id="create-job">
             Company Name:
@@ -33,6 +33,8 @@ function JobController(){
             </form></div>`
         return template;
     }
+
+    //adds skill to list
     $('#add-skill-btn').on('click', addSkillToList());
 
     function addSkillToList(){
@@ -41,11 +43,13 @@ function JobController(){
         $('#add-skill-list').innerHTML = curList + newSkill;
     }
 
+    //submits job creation form
     $('#create-form-submit').on('click', function(){
         //if skill left in input add to list
         if ($('#skill-required').value) {
             addSkillToList();
         }
+        //loop through list to make array of required skills
         var reqList = $('#add-skill-list').childNodes;
         var reqArr = [];
         for (i = 0; i < reqList.length; i++) {
@@ -56,11 +60,45 @@ function JobController(){
             $('#create-job input[name=pay]'),$('#create-job input[name=img]'),$('#create-job input[name=password]'));
     });
 
+    //edit existing job
     $('.doc-container').on("click", "btn-edit", function (event) {
-        $.get('-edit.html', (html) => {
-            $('.doc-container').append(html)
-        });
+        //insert way to access page here / check credentials
+        //first check for job existence by id
+        //then check for logged in state
+        //if not logged in, prompt for password specific to job
+        //**********make sure this is fed the id of the specific job to be edited**********
+        drawExistingForEdit(this.id);
     });
+
+    function drawExistingForEdit(jobId) {
+        var thisJob = jobs[jobId];
+        var reqHTML = '';
+        for (i = 0; i < thisJob.requirements.length; i++) {
+            reqHTML += '<li class="list-group-item">' + thisJob.requirements[i] + '<li>';
+        }
+        template = `<div class="edit-job-container"><form id="edit-job">
+            Company Name:
+            <input type="text" name="coName" value="${thisJob.coName}">
+            Job Title:
+            <input type="text" name="jobTitle" value="${thisJob.jobTitle}">
+            Pay:
+            <input type="text" name="pay" value="${thisJob.pay}">
+            Skills Required: 
+            <input type="text" name="skill-required" placeholder="Skill Required">
+            <button type="button" id='add-skill-btn' class='btn btn-primary'> + Skill </button>
+            <ul class="list-group" id="add-skill-list">
+            ${reqHTML}
+            </ul>
+            Listing URL:
+            <input type="text" name="link" value="${thisJob.link}">
+            Description:
+            <textarea name="bio">${thisJob.bio}</textarea>
+            Image URL:
+            <input type="text" name="img" value="${thisJob.img}">
+            <input type="submit" id="edit-form-submit">
+            </form></div>`
+        return template;        
+    }
 
     $('.doc-container').on("click", "btn-table", function (event) {
         $.get('-table.html', (html) => {
@@ -70,12 +108,6 @@ function JobController(){
 
     $('.doc-container').on("click", "btn-swipe", function (event) {
         $.get('-swipe.html', (html) => {
-            $('.doc-container').append(html)
-        });
-    });
-
-    $('.doc-container').on("click", ".btn-create", function (event) {
-        $.get('-create.html', (html) => {
             $('.doc-container').append(html)
         });
     });
