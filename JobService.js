@@ -5,7 +5,7 @@ var userService = new UserService();
 var self = this; 
 var loginState = false;
 
-    function Job(coName,jobTitle, requirements, links, bio, pay,img, password){
+    function Job(coName,jobTitle, requirements, links, bio, pay,img, password, jobId){
         this.coName = coName; 
         this.jobTitle= jobTitle; 
         this.requirements = requirements; 
@@ -18,7 +18,14 @@ var loginState = false;
         this.date= Date.now() 
         this.interested ={};
         this.employable={};
-        this.jobId = Math.floor(Math.random()*9999999999999999) *Math.floor(Math.random()*9999999999999999)*Math.floor(Math.random()*9999999999999999)
+        this.jobId = function(jobId){
+                if(jobId===undefined){
+                return Math.floor(Math.random()*9999999999999999) *Math.floor(Math.random()*9999999999999999)*Math.floor(Math.random()*9999999999999999)
+            }else{
+                return jobId;
+                }
+            }   
+
 
          var randomKey = Math.floor(Math.random()*9999999999999999) *Math.floor(Math.random()*9999999999999999)*Math.floor(Math.random()*9999999999999999)     
 }
