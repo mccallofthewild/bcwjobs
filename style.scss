@@ -7,11 +7,38 @@
     $f : #5ACFD6;
     $g : #D2FAFB;
     $h : #0C4B8E;
-
+html{
+    font-size:10px;
+    height:100%;
+}
 body{
     height:100%;
     width:100%;
     background:$a;
+}
+h1{
+    font-size:8rem;
+}
+h2{
+    font-size:5rem;
+}
+h3{
+    font-size:8rem;
+}
+h4{
+    font-size:8rem;
+}
+h5{
+    font-size:8rem;
+}
+h6{
+    font-size:8rem;
+}
+p{
+    font-size:3rem;
+}
+li{
+    font-size:4rem;
 }
 .clickable{
     cursor:pointer;
@@ -31,7 +58,7 @@ body{
         align-items: flex-end;
         background-color:$d;
         color:$a;
-        width:26%;
+        width:75%;
         height:80%;
         border-radius:40px;
         overflow: hidden;
@@ -48,16 +75,19 @@ body{
             box-shadow: 0px 7px 10px rgba(0,0,0,0.5);
 
             .image-container{
-                height:10vw;
-                width:10vw;
+                min-height:200px;
+                max-width:200px;
                 overflow: hidden;
+                background-color:$d;
                 box-shadow: 2px 0px 5px rgba(0,0,0,0.3), -2px 0px 5px rgba(0,0,0,0.3);
+                margin: 0% 30%;
 
                 img{
                     width:100%;
                 }
             }
             .title-container{
+                text-align: center;
                 .name{
 
                 }
@@ -79,7 +109,9 @@ body{
                     align-items: flex-end;
                     justify-content: space-around;
                     width: 100%;
-                    height: 60%;
+                    height: 30%;
+                    margin-top:10%;
+                    margin-bottom:2%;
                 ul{
                     list-style: none;
                 }
@@ -89,7 +121,7 @@ body{
                     flex-direction: column;
                     justify-content: space-around;
                     align-items: flex-start;
-                    height:50%;
+                    height:75%;
                     .skill{
                         i{
                             margin-right:1em;
@@ -147,6 +179,11 @@ body{
                 width: 70%;
                 position: relative;
                 overflow: hidden;
+                margin-top:2%;
+                .bio{
+                    margin-top:2%;
+                    border-top:2px solid white;
+                }
                 .fadeout-section{
                     position: absolute;
                     background: linear-gradient(to top, $d, $d, transparent);
@@ -156,8 +193,66 @@ body{
                     text-align: center;
                 }
             }
+            .action-container{
+                display: flex;
+                justify-content: space-between;
+                align-content: space-around;
+                width:90%;
+                padding: 3rem 3rem;
+
+                .action{
+                }
+                i{
+                    font-size:5rem;
+                }
+            }
         }
 
     }
 
+}
+
+
+/* ----------- Non-Retina Screens ----------- */
+@media screen 
+  and (min-device-width: 1200px) 
+  and (max-device-width: 1600px) 
+  and (-webkit-min-device-pixel-ratio: 1) {
+        h1{
+            font-size:8rem;
+        }
+        h2{
+            font-size:5rem;
+        }
+        h3{
+            font-size:4rem;
+        }
+        h4{
+            font-size:2rem;
+        }
+        h5{
+            font-size:3rem;
+        }
+        h6{
+            font-size:8rem;
+        }
+        p{
+            font-size:2rem;
+        }
+        li{
+            font-size:2rem;
+        }
+      .cards-container{
+          .card{
+              width:33%;
+          }
+      }
+}
+
+/* ----------- Retina Screens ----------- */
+@media screen 
+  and (min-device-width: 1200px) 
+  and (max-device-width: 1600px) 
+  and (-webkit-min-device-pixel-ratio: 2)
+  and (min-resolution: 192dpi) { 
 }
