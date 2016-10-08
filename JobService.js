@@ -3,6 +3,7 @@ function JobService(){
 var userService = new UserService(); 
 
 var self = this; 
+var loginState = false;
 
     function Job(coName,jobTitle, requirements, links, bio, pay,img, password){
         this.coName = coName; 
@@ -48,13 +49,19 @@ this.verifyEmployer = function(password, encryptedKey){
        }
 
 
+
+
 this.checkLogin = function(){
     if(getSessionData()){
-        return true;        
+        loginState = true     
     }else{
-        return false; 
+        loginState = false;
+        prompt('Enter Password for Job:')
+        
     }
 }
+
+
 
 
 this.save = function(id){

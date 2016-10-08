@@ -63,9 +63,12 @@ function JobController(){
 
     //edit existing job
     $('.doc-container').on("click", "btn-edit", function (event) {
+        
         //insert way to access page here / check credentials
         //first check for job existence by id
+
         //then check for logged in state
+            jobService.checkLogin()
         //if not logged in, prompt for password specific to job
         //**********make sure this is fed the id of the specific job to be edited**********
         drawExistingForEdit(this.id);
