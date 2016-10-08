@@ -11,35 +11,35 @@ html{
     font-size:10px;
     height:100%;
 }
-body{
-    height:100%;
-    width:100%;
-    background:$a;
-}
-h1{
-    font-size:8rem;
-}
-h2{
-    font-size:5rem;
-}
-h3{
-    font-size:8rem;
-}
-h4{
-    font-size:8rem;
-}
-h5{
-    font-size:8rem;
-}
-h6{
-    font-size:8rem;
-}
-p{
-    font-size:3rem;
-}
-li{
-    font-size:4rem;
-}
+// body{
+//     height:100%;
+//     width:100%;
+//     background:$a;
+// }
+// h1{
+//     font-size:8rem;
+// }
+// h2{
+//     font-size:5rem;
+// }
+// h3{
+//     font-size:8rem;
+// }
+// h4{
+//     font-size:8rem;
+// }
+// h5{
+//     font-size:8rem;
+// }
+// h6{
+//     font-size:8rem;
+// }
+// p{
+//     font-size:3rem;
+// }
+// li{
+//     font-size:4rem;
+// }
 .clickable{
     cursor:pointer;
 }
@@ -247,6 +247,14 @@ li{
               width:33%;
           }
       }
+}
+.form-page-container{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.job-form-container{
+    width:50%;
 }
 
 /* ----------- Retina Screens ----------- */

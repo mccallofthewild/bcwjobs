@@ -1,4 +1,4 @@
-$.get('-tableview.html', (html)=>{
+$.get('-basepage.html', (html)=>{
     $('.doc-container').html(html)
 })
 
