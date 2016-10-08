@@ -14,10 +14,9 @@ var self = this;
         this.encryptedKey = sjcl.encrypt(password, randomKey);
         this.img=img;
         this.exp= Date.now() + 2592900000;
-        this.jobId=jobId++;
         this.interested ={};
         this.employable={};
-        this.id = Math.floor(Math.random()*9999999999999999) *Math.floor(Math.random()*9999999999999999)*Math.floor(Math.random()*9999999999999999)
+        this.jobId = Math.floor(Math.random()*9999999999999999) *Math.floor(Math.random()*9999999999999999)*Math.floor(Math.random()*9999999999999999)
 
          var randomKey = Math.floor(Math.random()*9999999999999999) *Math.floor(Math.random()*9999999999999999)*Math.floor(Math.random()*9999999999999999)     
 }
@@ -26,7 +25,7 @@ var AllJobs = {}
 
 this.addJob = function(coName,jobTitle, requirements, links, bio, pay,img, password){
     var job = new Job(coName,jobTitle, requirements, links, bio, pay,img, password)
-    AllJobs[job.id]= job
+    AllJobs[job.jobId]= job
 }
 
 
@@ -69,25 +68,15 @@ this.getSessionData = function(){
 
 
 //REMOVES A USER THE EMPLOYER DOESN'T WANT//
-this.removeInterestedUser = function(id,arr){
-    for(var i =0; i <arr.length; i++){
-        if(arr[i]==id){
-            arr.splice(i,1)
-            return arr;
-        }
-    }
-}
-
 this.removeInterestedUser = function(jobId, userId){
-   delete AllJobs[jobId].interested[userId]
+   delete AllJobs[jobId].interested[userService.userId]
 }
-
 
 
 
 //ADD A USER THE EMPLOYER WANTS INTO THEIR EMPLOYABLE ARRAY//
 this.makeEmployable = function(id, arr){
-    AllJobs[jobId].employable[userId]
+    AllJobs[jobId].employable[userService.userId]
 }
 
 
