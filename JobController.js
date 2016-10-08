@@ -104,14 +104,28 @@ function JobController(){
         return template;        
     }
 
+    function drawToTable() {
+        template = '';
+        for (var job in jobs) {
+            template += `<tr>
+                            <td>${jobs.coName}</td>
+                            <td>${jobs.title}</td>
+                            <td>${jobs.date.toDateString()}</td>
+                            <td class="clickable"><button class="btn btn-primary edit-job" id="${jobs.jobId}">Edit</button> <button class="btn btn-primary delete-job" id="${jobs.jobId}">Delete</button></td>
+                        </tr>`
+        }
+        return template;
+    }
+
     $('.doc-container').on("click", "btn-table", function (event) {
-        $.get('-table.html', (html) => {
-            $('.doc-container').append(html)
+        $.get('-tableview.html', (html) => {
+            var template = drawToTable();
+            $('.data-area').html(template);
         });
     });
 
     $('.doc-container').on("click", "btn-swipe", function (event) {
-        $.get('-swipe.html', (html) => {
+        $.get('-cardview.html', (html) => {
             $('.doc-container').append(html)
         });
     });

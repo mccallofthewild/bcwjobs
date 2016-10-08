@@ -128,16 +128,16 @@ li {
           background-color: #D2FAFB; }
         .cards-container .card .card-body .skill-container i.info-color-3 {
           color: #D2FAFB; }
-      .cards-container .card .card-body .bio-container {
+      .cards-container .card .card-body .info-container {
         height: 22%;
         width: 70%;
         position: relative;
         overflow: hidden;
         margin-top: 2%; }
-        .cards-container .card .card-body .bio-container .bio {
+        .cards-container .card .card-body .info-container .bio {
           margin-top: 2%;
           border-top: 2px solid white; }
-        .cards-container .card .card-body .bio-container .fadeout-section {
+        .cards-container .card .card-body .info-container .fadeout-section {
           position: absolute;
           background: linear-gradient(to top, #112D4E, #112D4E, transparent);
           bottom: 0;
