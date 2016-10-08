@@ -1,4 +1,4 @@
-$.get('-cardview.html', (html)=>{
+$.get('-tableview.html', (html)=>{
     $('.doc-container').html(html)
 })
 
