@@ -1,0 +1,35 @@
+Jobs have a unique id that starts with 1 and increments. 
+
+Jobs constructor: 
+coName - string
+jobTitle - string
+requirements - JSON array
+link - string
+bio - text
+pay - string (examples: '50,000' or 'D.O.E'
+encrypted key - randomkey encrypted with SJCL
+img = img link
+exp = date object
+job id = number 
+interested = array
+employable = array
+
+Functions: 
+requiredFields() = if no link, bio, or img will return empty string
+
+verifyEmployer(password, encryptedKey) = Will save Employer's unique Id to session storage
+    if they have a correct password
+    else will alert password is incorrect
+
+checkLogin()= see's if Employer's id is saved in session storage, if it 
+    then the Employer is logged-in. 
+
+save(id)= saves Employer's id to sessionStorage as '_EmployerSessionJSON'
+
+getSessionData()= retrieves Employer's id from session storage
+
+removeInterestedUser(id, arr) = Employer will have a property called 'intersted'
+    which returns an array of intersted employers. This removes the users   
+    the employer doesn't want 
+
+makeEmployable(id, arr) = will push interested users to Employer's employable array
