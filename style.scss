@@ -1,9 +1,163 @@
+// Colors
+    $a : #F9F7F7;
+    $b : #DBE2EF;
+    $c : #3F72AF;
+    $d : #112D4E;
+    $e : #189BFA;
+    $f : #5ACFD6;
+    $g : #D2FAFB;
+    $h : #0C4B8E;
+
 body{
     height:100%;
     width:100%;
+    background:$a;
 }
-.doc-container{
-    height:100%;
+.clickable{
+    cursor:pointer;
+}
+.cards-container{
+    display: flex;
+    justify-content: center;
+    align-items:center;
+
+    height:100vh;
     width:100%;
-    background:blue;
+    
+    .card{
+        display: flex;
+        flex-direction: column;
+        justify-content: space-around;
+        align-items: flex-end;
+        background-color:$d;
+        color:$a;
+        width:26%;
+        height:80%;
+        border-radius:40px;
+        overflow: hidden;
+        box-shadow: 2px 0px 5px rgba(0,0,0,0.3), -2px 0px 5px rgba(0,0,0,0.3);
+
+        .card-heading{
+            display: flex;
+            flex-direction: column;
+            justify-content: space-around;
+            align-items: center;
+            width:100%;
+            height:100%;
+            padding:15% 0;
+            box-shadow: 0px 7px 10px rgba(0,0,0,0.5);
+
+            .image-container{
+                height:10vw;
+                width:10vw;
+                overflow: hidden;
+                box-shadow: 2px 0px 5px rgba(0,0,0,0.3), -2px 0px 5px rgba(0,0,0,0.3);
+
+                img{
+                    width:100%;
+                }
+            }
+            .title-container{
+                .name{
+
+                }
+                .job-title{
+
+                }
+            }
+        }
+
+        .card-body{
+            display: flex;
+            flex-direction: column;
+            justify-content: space-around;
+            align-items: center;
+            height: 80%;
+            width:100%;
+                .skill-container{
+                    display: flex;
+                    align-items: flex-end;
+                    justify-content: space-around;
+                    width: 100%;
+                    height: 60%;
+                ul{
+                    list-style: none;
+                }
+                .skills{
+
+                    display: flex;
+                    flex-direction: column;
+                    justify-content: space-around;
+                    align-items: flex-start;
+                    height:50%;
+                    .skill{
+                        i{
+                            margin-right:1em;
+                            text-shadow: 2px 0px 5px rgba(0,0,0,0.3), -2px 0px 5px rgba(0,0,0,0.3);
+
+                        }
+                    }
+                }
+                .bars-container{
+                    display: flex;
+                    flex-direction: row-reverse;
+                    justify-content: center;
+                    align-items:flex-end;
+                    width:50%;
+                    height:100%;
+                
+                    .bar{
+                        width:20%;
+                        background-color:$a;
+                        height:60%;
+                        box-shadow: 2px 0px 5px rgba(0,0,0,0.3), -2px 0px 5px rgba(0,0,0,0.3);
+                    }
+                    .bar-1{
+                        height:60%;
+                    }
+                    .bar-2{
+                        height:80%;
+                    }
+                    .bar-3{
+                        height:100%;
+                    }
+                }
+                .bar.info-color-1{
+                    background-color:$e;
+                }
+                i.info-color-1{
+                    color:$e;
+                }
+                .bar.info-color-2{
+                    background-color:$f;
+                }
+                i.info-color-2{
+                    color:$f;
+                }
+                .bar.info-color-3{
+                    background-color:$g;
+                }
+                i.info-color-3{
+                    color:$g;
+                }
+
+            }
+            .bio-container{
+                height: 22%;
+                width: 70%;
+                position: relative;
+                overflow: hidden;
+                .fadeout-section{
+                    position: absolute;
+                    background: linear-gradient(to top, $d, $d, transparent);
+                    bottom: 0;
+                    width: 100%;
+                    height:80%;
+                    text-align: center;
+                }
+            }
+        }
+
+    }
+
 }
