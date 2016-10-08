@@ -107,15 +107,17 @@ function JobController(){
             template += `<tr>
                             <td>${jobs.coName}</td>
                             <td>${jobs.title}</td>
-                            <td>${jobs.date}</td>
-                            <td class="clickable"><button class="btn btn-primary">Edit</button> <button class="btn btn-primary">Delete</button></td>
+                            <td>${jobs.date.toDateString()}</td>
+                            <td class="clickable"><button class="btn btn-primary edit-job" id="${jobs.jobId}">Edit</button> <button class="btn btn-primary delete-job" id="${jobs.jobId}">Delete</button></td>
                         </tr>`
         }
+        return template;
     }
 
     $('.doc-container').on("click", "btn-table", function (event) {
         $.get('-tableview.html', (html) => {
-            $('.doc-container').append(html)
+            var template = drawToTable();
+            $('.data-area').html(template);
         });
     });
 
