@@ -1,4 +1,5 @@
 function JobService(){
+
 var self = this; 
 
 
@@ -25,6 +26,23 @@ var jobId =1;
                     }
                  }
     }
+
+
+    this.randomString = function(password, data){        
+       var randomString = sjcl.encrypt(password, data)
+       var decrpytedString = sjcl.decrypt(password, randomString)
+        if(data == decrpyptedString){
+        }else{
+                alert("INCORRECT PASSWORD")
+        }
+
+}
+
+
+
+}
+
+
 
 
 
