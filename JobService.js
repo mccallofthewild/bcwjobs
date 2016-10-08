@@ -25,7 +25,7 @@ var AllJobs = {}
 
 this.addJob = function(coName,jobTitle, requirements, links, bio, pay,img, password){
     var job = new Job(coName,jobTitle, requirements, links, bio, pay,img, password)
-    AllJobs[job.id]= job
+    AllJobs[job.jobId]= job
 }
 
 
