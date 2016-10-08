@@ -85,18 +85,13 @@ this.removeInterestedUser = function(jobId, userId){
 
 
 
-
-
-
 //ADD A USER THE EMPLOYER WANTS INTO THEIR EMPLOYABLE ARRAY//
 this.makeEmployable = function(id, arr){
-    for(var i = 0; ii<arr.length; i++){
-        if(id==arr[i].id){
-            employable.push(arr[i])
-        }
-
-    }
+    AllJobs[jobId].employable[userId]
 }
+
+
+
 
 
 
