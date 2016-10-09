@@ -2,42 +2,41 @@ function JobService(){
 
 var userService = new UserService(); 
 
-var self = this; 
-var loginState = false;
+var self = this;
 
-    function Job(coName,jobTitle, requirements, links, bio, pay,img, password, jobId){
+var _jobSessions = JSON.parse(sessionStorage.getItem('_EmployerSessionJSON')) || {}
+
+var allJobs = JSON.parse(localStorage.getItem('_JobsJSON')) || {}
+
+
+    function Job(coName,jobTitle, requirements, links, bio, pay, img, password, jobId){
+        var randomId = `${Math.floor(Math.random()*9999999999999999)}${Math.floor(Math.random()*9999999999999999)}${Math.floor(Math.random()*9999999999999999)}`;
+        var randomKey = `${Math.floor(Math.random()*9999999999999999)}${Math.floor(Math.random()*9999999999999999)}${Math.floor(Math.random()*9999999999999999)}`;    
         this.coName = coName; 
         this.jobTitle= jobTitle; 
         this.requirements = requirements; 
-        this.link= link ; 
+        this.link= links ; 
         this.bio = bio; 
         this.pay = pay; 
         this.encryptedKey = sjcl.encrypt(password, randomKey);
         this.img=img;
         this.exp= Date.now() + 2592900000;
-        this.date= Date.now() 
+        this.date= Date.now();
         this.interested ={};
         this.employable={};
-        this.jobId = function(jobId){
-                if(jobId===undefined){
-                return Math.floor(Math.random()*9999999999999999) *Math.floor(Math.random()*9999999999999999)*Math.floor(Math.random()*9999999999999999)
-            }else{
-                return jobId;
-                }
-            }   
-
-
-         var randomKey = Math.floor(Math.random()*9999999999999999) *Math.floor(Math.random()*9999999999999999)*Math.floor(Math.random()*9999999999999999)     
+        this.jobId = (jobId===undefined)? randomId : jobId;
 }
 
-var allJobs = {}
 
 this.addJob = function(coName,jobTitle, requirements, links, bio, pay,img, password){
     var job = new Job(coName,jobTitle, requirements, links, bio, pay,img, password)
- allJobs[job.jobId]= job
+ allJobs[job.jobId]= job;
+ updateLocalStorage();
+
 }
 
 this.getJobs =function(){
+    console.log(allJobs)
     return allJobs;
 }
 
@@ -50,36 +49,32 @@ this.requiredFields =function(){
 this.verifyEmployer = function(password, encryptedKey){
    try{
          sjcl.decrypt(password, encryptedKey)
-            save()
-            }catch(error){    
+         _jobSessions[id] = true;
+         updateSessionStorage();
+         alert("NICE! YOU GOT IT RIGHT!")
+            }catch(error){
             console.log('error')
         alert('INCORRECT PASSWORD: TRY AGAIN')
             }        
        }
+function updateSessionStorage(){
+    sessionStorage.setItem('_EmployerSessionJSON', JSON.stringify(_jobSessions));
+}
 
+// FOR TEST DATA WHILE WE DON'T HAVE A DB
+function updateLocalStorage(){
+    localStorage.setItem('_JobsJSON', JSON.stringify(allJobs));
+}
 
-
-
-this.checkLogin = function(){
-    if(getSessionData()){
-        loginState = true     
-    }else{
-        loginState = false;
-        prompt('Enter Password for Job:')
-        
-    }
+this.checkLogin = function(id){
+    return !!_jobSessions[id]
 }
 
 
 
-
-this.save = function(id){
-          sessionStorage.setItem('_EmployerSessionJSON', JSON.stringify(id));
-           }
-
-this.getSessionData = function(){
+var getSessionData = function(){
             var sessionData = sessionStorage.getItem('_EmployerSessionJSON')
-            sessionData = JSONparse.parse(sessionData)
+            sessionData = JSON.parse(sessionData)
             return sessionData; 
             }
 
