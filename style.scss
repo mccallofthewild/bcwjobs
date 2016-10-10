@@ -7,39 +7,77 @@
     $f : #5ACFD6;
     $g : #D2FAFB;
     $h : #0C4B8E;
+    $white: $a;
+// Fonts
+    $font-a: 'Share Tech Mono', monospace;
+    $font-b: 'Fira Mono', monospace;
+    $font-c: 'Open Sans', sans-serif;
+    $font-d: 'Dosis', sans-serif;
+
+
 html{
     font-size:10px;
     height:100%;
 }
-// body{
-//     height:100%;
-//     width:100%;
-//     background:$a;
-// }
-// h1{
-//     font-size:8rem;
-// }
-// h2{
-//     font-size:5rem;
-// }
-// h3{
-//     font-size:8rem;
-// }
-// h4{
-//     font-size:8rem;
-// }
-// h5{
-//     font-size:8rem;
-// }
-// h6{
-//     font-size:8rem;
-// }
-// p{
-//     font-size:3rem;
-// }
-// li{
-//     font-size:4rem;
-// }
+body{
+    height:100%;
+    width:100%;
+    background:$b;
+    font-family: $font-c;
+    overflow-x:hidden;
+}
+.radfont{
+    font-family: $font-a;
+}
+.navbar-default{
+    color:$white;
+    font-family:$font-a;
+    background-color:$d;
+    border:none;
+    outline: none;
+    border-radius:0;
+    .dropdown-menu{
+        background-color: $d;
+    }
+    .navbar-brand{
+        color:$white;
+    }
+    .navbar-nav li a{
+        color:$white;
+    }
+    .navbar-nav>.active>a, .navbar-nav>.active>a:focus, .navbar-nav>.active>a:hover{
+        color:$d;
+        background-color:$b;
+        text-shadow: none;
+        box-shadow: 2px 2px 10px rgba(0,0,0,0.3);
+
+    }
+    .navbar-nav>li>a:focus, .navbar-nav>li>a:hover{
+        color:$f;
+        text-shadow: 2px 2px 2px rgba(0,0,0,0.5);
+    }
+    .navbar-brand:focus, .navbar-brand:hover{
+        color:$f;
+    }
+}
+.dropdown-menu>li>a:focus, .dropdown-menu>li>a:hover{
+    color:$d;
+}
+.panel-primary{
+    border:none;
+    // box-shadow: 2px 2px 10px rgba(0,0,0,0.3);
+
+    .panel-heading{
+        background-color:$d;
+        font-family: $font-a;
+        border:none;
+    }
+}
+.btn-primary{
+    font-family:$font-a;
+    background-color:$d;
+    border:none;
+}
 .clickable{
     cursor:pointer;
 }
@@ -47,7 +85,6 @@ html{
     display: flex;
     justify-content: center;
     align-items:center;
-
     height:100vh;
     width:100%;
     
@@ -60,10 +97,13 @@ html{
         color:$a;
         width:75%;
         height:80%;
-        border-radius:40px;
+        border-radius:4px;
         overflow: hidden;
-        box-shadow: 2px 0px 5px rgba(0,0,0,0.3), -2px 0px 5px rgba(0,0,0,0.3);
-
+        // box-shadow: 2px 0px 5px rgba(0,0,0,0.3), -2px 0px 5px rgba(0,0,0,0.3);
+        font-family: $font-a;
+        transition: all 0.75s ease-out;
+        position: absolute;
+        top: 20%;
         .card-heading{
             display: flex;
             flex-direction: column;
@@ -72,18 +112,25 @@ html{
             width:100%;
             height:100%;
             padding:15% 0;
-            box-shadow: 0px 7px 10px rgba(0,0,0,0.5);
 
             .image-container{
-                min-height:200px;
-                max-width:200px;
+                display: flex;
+                justify-content: center;
+                align-items: center;
+                height:70%;
+                width:100%;
                 overflow: hidden;
                 background-color:$d;
-                box-shadow: 2px 0px 5px rgba(0,0,0,0.3), -2px 0px 5px rgba(0,0,0,0.3);
                 margin: 0% 30%;
 
+
                 img{
-                    width:100%;
+                    height:100%;
+                    top:0;
+                    left:0;
+                    clip: rect(0px,400px,400px,0px);
+                    
+
                 }
             }
             .title-container{
@@ -118,7 +165,7 @@ html{
                 .skills{
 
                     display: flex;
-                    flex-direction: column;
+                    flex-direction: column-reverse;
                     justify-content: space-around;
                     align-items: flex-start;
                     height:75%;
@@ -254,7 +301,9 @@ html{
     align-items: center;
 }
 .job-form-container{
-    width:50%;
+    display: flex;
+    justify-content: center;
+    align-items:stretch;
 }
 
 /* ----------- Retina Screens ----------- */

@@ -25,15 +25,34 @@ var allJobs = JSON.parse(localStorage.getItem('_JobsJSON')) || {}
         this.interested ={};
         this.employable={};
         this.jobId = (jobId===undefined)? randomId : jobId;
+
 }
 
 
 this.addJob = function(coName,jobTitle, requirements, links, bio, pay,img, password){
     var job = new Job(coName,jobTitle, requirements, links, bio, pay,img, password)
- allJobs[job.jobId]= job;
- updateLocalStorage();
+    allJobs[job.jobId]= job;
+    updateLocalStorage();
 
 }
+
+this.updateJob = function(job, coName,jobTitle, requirements, links, bio, pay,img){
+    job.coName = coName; 
+    job.jobTitle= jobTitle; 
+    job.requirements = requirements; 
+    job.link= links ; 
+    job.bio = bio; 
+    job.pay = pay; 
+    job.img=img;
+    updateLocalStorage()
+}
+
+this.destroyJob = function(id){
+    delete allJobs[id];
+    updateLocalStorage();
+}
+
+
 
 this.getJobs =function(){
     console.log(allJobs)
@@ -46,16 +65,17 @@ this.requiredFields =function(){
        }  
     }
 
-this.verifyEmployer = function(password, encryptedKey){
+this.verifyEmployer = function(password, encryptedKey, id){
    try{
          sjcl.decrypt(password, encryptedKey)
          _jobSessions[id] = true;
          updateSessionStorage();
-         alert("NICE! YOU GOT IT RIGHT!")
-            }catch(error){
-            console.log('error')
-        alert('INCORRECT PASSWORD: TRY AGAIN')
-            }        
+         alert("NICE! YOU GOT IT RIGHT!");
+    }catch(error){
+        console.log('error');
+        alert('INCORRECT PASSWORD: TRY AGAIN');
+        return new Error("NOT RIGHT PASSWORD");
+    }        
        }
 function updateSessionStorage(){
     sessionStorage.setItem('_EmployerSessionJSON', JSON.stringify(_jobSessions));
@@ -66,7 +86,7 @@ function updateLocalStorage(){
     localStorage.setItem('_JobsJSON', JSON.stringify(allJobs));
 }
 
-this.checkLogin = function(id){
+this.isLoggedIn = function(id){
     return !!_jobSessions[id]
 }
 

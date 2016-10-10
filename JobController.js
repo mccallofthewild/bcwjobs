@@ -11,11 +11,12 @@ function JobController(){
         template = `<div class="form-page-container">
             <div class="job-form-container">
             <div class="panel panel-primary">
-            <div class="panel-heading">Post a Job:</div>
+            <div class="panel-heading"><h4>Post a Job:<h4></div>
             <div class="panel-body">
-            <div class="create-job-container"><form class="form-group " id="create-job">
+            <div class="job-form-container">
+            <form class="form-group " jobid="${propOrBlank("jobId")}" id="job-form">
             Company Name:
-            <input type="text" value="${job.coName}" required="true" class="form-control" name="coName" placeholder="Company Name">
+            <input type="text" value="${propOrBlank("coName")}" required="true" class="form-control" name="coName" placeholder="Company Name">
             Job Title:
             <input type="text" value='${propOrBlank("jobTitle")}' required="true" class="form-control" name="jobTitle" placeholder="Job Title">
             Pay:
@@ -36,16 +37,15 @@ function JobController(){
             Image URL:
             <input type="text" value='${propOrBlank("img")}' class="form-control" name="img" placeholder="URL to image">
             Create a password to access this listing later:
-            <input type="password" required="true" class="form-control" name="password">
-            <input type="reset" class="btn btn-danger">
-            <input type="submit" id="create-form-submit" class="btn btn-success">
+            ${job? '' : '<input type="password" required="true" class="form-control" name="password">'}
+            <!-- <input type="reset" class="btn btn-primary"> -->
+            <input type="submit" id="create-form-submit" class="btn btn-primary">
             </form></div>
             </div>
             </div>
             </div>
             </div>
 `
-            console.log(template);
         $('.main-container').html(template);
     }
 
@@ -58,9 +58,9 @@ function JobController(){
             console.log(jobs[job].date)
             template += `<tr>
                             <td>${jobs[job].coName}</td>
-                            <td>${jobs[job].title || ""}</td>
+                            <td>${jobs[job].jobTitle || ""}</td>
                             <td>${new Date(jobs[job].date).toDateString()}</td>
-                            <td class="clickable text-right"><button class="btn btn-primary btn-edit" jobid="${jobs[job].jobId}">Edit</button> <button class="btn btn-primary delete-job" jobid="${jobs.jobId}">Delete</button></td>
+                            <td class="clickable text-right"><button class="btn btn-primary btn-edit" jobid="${jobs[job].jobId}">Edit</button> <button class="btn btn-primary btn-delete" jobid="${jobs[job].jobId}">Delete</button></td>
                         </tr>`
         }
         return template;
@@ -100,8 +100,8 @@ function JobController(){
         jobFormView();
     });
     
-    //submits job creation form
-    $('body').on('submit', '#create-job', function(event){
+    //submits job creation/edit form
+    $('body').on('submit', '#job-form', function(event){
         event.preventDefault()
         console.log("LISTENING")
         //if skill left in input add to list
@@ -114,45 +114,95 @@ function JobController(){
         for (i = 0; i < reqList.length; i++) {
             reqArr[i] = reqList[i].innerHTML;
         }
-
-        jobService.addJob(
-            $('#create-job input[name=coName]').val(),
-            $('#create-job input[name=jobTitle]').val(),
+        var jobId = $(this).attr('jobid')
+        if(jobId != ""){
+            jobService.updateJob(
+            jobService.getJobs()[jobId],
+            $('#job-form input[name=coName]').val(),
+            $('#job-form input[name=jobTitle]').val(),
             reqArr,
-            $('#create-job input[name=link]').val(),
-            $('#create-job input[name=bio]').val(),
+            $('#job-form input[name=link]').val(),
+            $('#job-form input[name=bio]').val(),
 
-            $('#create-job input[name=pay]').val(),
-            $('#create-job input[name=img]').val(),
-            $('#create-job input[name=password]').val()
+            $('#job-form input[name=pay]').val(),
+            $('#job-form input[name=img]').val()
             );
-                console.log(jobService.getJobs())
+        }else{
+            jobService.addJob(
+            $('#job-form input[name=coName]').val(),
+            $('#job-form input[name=jobTitle]').val(),
+            reqArr,
+            $('#job-form input[name=link]').val(),
+            $('#job-form input[name=bio]').val(),
+
+            $('#job-form input[name=pay]').val(),
+            $('#job-form input[name=img]').val(),
+            $('#job-form input[name=password]').val()
+            );
+        }
+            console.log(jobService.getJobs())
             tableView()
 
     });
 
     //edit existing job
     $('body').on("click", ".btn-edit", function (event) {
-        
+        var jobId = $(this).attr('jobid');
+        var thisjob = jobService.getJobs()[jobId]
         //insert way to access page here / check credentials
         //first check for job existence by id
-console.log("You clicked edit")
+        jobService.verifyEmployer(prompt("Enter password to edit."), thisjob.encryptedKey, jobId)
+        console.log("You clicked edit")
         //then check for logged in state
-            jobService.checkLogin()
+        if(jobService.isLoggedIn(jobId)){
+            jobFormView(thisjob)
+        }
             console.log($(this).attr('jobid'))
         //if not logged in, prompt for password specific to job
         //**********make sure this is fed the id of the specific job to be edited**********
-        jobFormView(jobService.getJobs()[$(this).attr('jobid')]);
     });
+
+    $('body').on("click", ".btn-delete", function (event) {
+        var jobId = $(this).attr('jobid');
+        var thisjob = jobService.getJobs()[jobId]
+        //insert way to access page here / check credentials
+        //first check for job existence by id
+        jobService.verifyEmployer(prompt("Enter password to delete this job."), thisjob.encryptedKey, jobId)
+        console.log("You clicked delete")
+        //then check for logged in state
+        if(jobService.isLoggedIn(jobId)){
+            if(confirm("Are you sure you want to delete this job?")){
+                jobService.destroyJob(jobId)
+                tableView()
+            }
+        }
+        //if not logged in, prompt for password specific to job
+        //**********make sure this is fed the id of the specific job to be edited**********
+    });
+    
 
     $('body').on("click", ".btn-table", function (event) {
         tableView()
     });
 
-    $('.doc-container').on("click", "btn-swipe", function (event) {
+    $('body').on("click", ".btn-swipe", function (event) {
         $.get('-cardview.html', (html) => {
-            $('.doc-container').html(html)
+            $('.main-container').html(html)
         });
+    });
+
+
+    $('body').on('click', '.nav li', function(event){
+        $('.nav li').removeClass('active');
+        $(this).addClass('active')
+    })
+
+    $('body').on('click', '.fa-check', function(event){
+        $(this).parents('.card').css({'transform' : 'translateX(300%)rotate(72deg)'})
+    });
+
+    $('body').on('click', '.fa-times', function(event){
+        $(this).parents('.card').css({'transform' : 'translateX(-300%)rotate(-72deg)'})
     });
 
 }
